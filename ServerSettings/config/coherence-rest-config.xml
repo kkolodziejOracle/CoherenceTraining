@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<rest xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xmlns="http://xmlns.oracle.com/coherence/coherence-rest-config"
+      xsi:schemaLocation=
+         "http://xmlns.oracle.com/coherence/coherence-rest-config
+      coherence-rest-config.xsd">
+  <resources>
+    <resource>
+      <cache-name>COUNTRY</cache-name>
+      <key-class>java.lang.String</key-class>
+      <value-class>com.oracle.coherence.model.Country</value-class>
+	<direct-query enabled="true"/>
+    </resource>
+<resource>
+      <cache-name>EMPLOYEE</cache-name>
+      <key-class>java.lang.Long</key-class>
+      <value-class>com.oracle.coherence.model.Employee</value-class>
+	<query>
+      <name>minors</name>
+      <expression>employeeId &gt; :number</expression>
+   	</query>
+<direct-query enabled="true"/>
+    </resource>
+  </resources>
+</rest>

@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<!DOCTYPE cache-config SYSTEM "cache-config.dtd">
+
+<cache-config>
+    <defaults>
+        <serializer>pof</serializer>
+    </defaults>
+	<caching-scheme-mapping>
+
+	<cache-mapping>
+        <cache-name>COUNTRY</cache-name>
+        <scheme-name>remote</scheme-name>
+    </cache-mapping>
+
+    <cache-mapping>
+        <cache-name>EMPLOYEE</cache-name>
+        <scheme-name>remote</scheme-name>
+    </cache-mapping>
+
+	</caching-scheme-mapping>
+	<caching-schemes>
+		<remote-cache-scheme>
+			<scheme-name>remote</scheme-name>
+			<service-name>ExtendTcpCacheService</service-name>
+            <serializer>
+                <class-name>com.tangosol.io.pof.ConfigurablePofContext</class-name>
+                <init-params>
+                    <init-param>
+                        <param-type>string</param-type>
+                        <param-value>pof-config.xml</param-value>
+                    </init-param>
+                </init-params>
+            </serializer>
+			<initiator-config>
+				<tcp-initiator>
+					<remote-addresses>
+						<socket-address>
+							<address>localhost</address>
+							<port>9091</port>
+						</socket-address>
+					</remote-addresses>
+					<connect-timeout>10s</connect-timeout>
+				</tcp-initiator>
+				<outgoing-message-handler>
+					<request-timeout>15s</request-timeout>
+				</outgoing-message-handler>
+			</initiator-config>
+		</remote-cache-scheme>
+	</caching-schemes>
+</cache-config>

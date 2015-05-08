@@ -1,0 +1,49 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                             http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.oracle.bzwbk</groupId>
+	<artifactId>BZWBK</artifactId>
+	<packaging>pom</packaging>
+	<version>1.0-SNAPSHOT</version>
+	<name>BZWBK-POC</name>
+
+	 <properties>
+		<java.version>1.7</java.version>
+        <spring.version>4.1.4.RELEASE</spring.version>
+		<oracle.version>12.1.3</oracle.version>
+        <ojdbc.version>12.1.0.2</ojdbc.version>
+         <project.version>1.0-SNAPSHOT</project.version>
+		 <jersey.version>1.18</jersey.version>
+		<jackson.version>1.9.2</jackson.version>
+		<jersey-grizzly2>1.12</jersey-grizzly2>
+    </properties>
+	
+	<modules>
+		<module>CoherenceObjects</module>
+		<module>BulkLoader</module>
+		<module>RestLibs</module>
+	</modules>
+	
+	<profiles>
+		<profile>
+			<id>dev</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-compiler-plugin</artifactId>
+						<configuration>
+							<source>${java.version}</source>
+							<target>${java.version}</target>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+		</profile>
+	</profiles>
+</project>

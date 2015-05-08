@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans   http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+                           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+                           http://www.springframework.org/schema/tx      http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
+ 
+    <!--
+        Scan for spring beans in this package and all sub-packages
+    -->
+    <context:component-scan base-package="com.oracle.bzwbk.dao"/>
+    <!--
+       Scan for classes needing transactions.  Defaults to using a transaction manager object named transactionManager
+   -->
+    <context:annotation-config/>
+
+    <bean
+            class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="location">
+            <value>database.properties</value>
+        </property>
+    </bean>
+
+    <bean id="dataSource"
+          class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="${jdbc.driverClassName}" />
+        <property name="url" value="${jdbc.url}" />
+        <property name="username" value="${jdbc.username}" />
+        <property name="password" value="${jdbc.password}" />
+    </bean>
+
+    <!--bean id="cdrRawDiameterPsCacheDAO" class="com.vodafone.m2m.wm30.coherence.dao.CdrRawDiameterPsCacheDAO">
+        <property name="cache" value="#{coherenceUtils.createCacheConnection('C_RAW_CCR_DIAMETER_PS')}" />
+    </bean>-->
+
+
+
+
+</beans>

@@ -1,0 +1,100 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE cache-config SYSTEM "cache-config.dtd">
+<cache-config>
+   <defaults>
+        <serializer>pof</serializer>
+    </defaults>
+  <caching-scheme-mapping>
+    <cache-mapping>
+        <cache-name>COUNTRY</cache-name>
+        <scheme-name>DefaultSchema</scheme-name>
+    </cache-mapping>
+
+    <cache-mapping>
+        <cache-name>EMPLOYEE</cache-name>
+        <scheme-name>DefaultSchema</scheme-name>
+    </cache-mapping>
+  </caching-scheme-mapping>
+  <caching-schemes>
+    <distributed-scheme>
+      <scheme-name>DefaultSchema</scheme-name>
+      <service-name>PartitionedPofCache</service-name>
+            <serializer>
+                    <class-name>com.tangosol.io.pof.ConfigurablePofContext</class-name>
+                    <init-params>
+                        <init-param>
+                            <param-type>string</param-type>
+                            <param-value>pof-config.xml</param-value>
+                        </init-param>
+                    </init-params>
+            </serializer>
+      <backing-map-scheme>
+        <local-scheme/>
+      </backing-map-scheme>
+      <local-storage>true</local-storage>
+      <autostart>true</autostart>
+    </distributed-scheme>
+
+ <proxy-scheme>
+      <service-name>ExtendTcpProxyService</service-name>
+      <acceptor-config>
+         <tcp-acceptor>
+            <local-address>
+               <address>localhost</address>
+               <port>9091</port>
+            </local-address>
+         </tcp-acceptor>
+<serializer>
+                    <class-name>com.tangosol.io.pof.ConfigurablePofContext</class-name>
+                    <init-params>
+                        <init-param>
+                            <param-type>string</param-type>
+                            <param-value>pof-config.xml</param-value>
+                        </init-param>
+                    </init-params>
+                </serializer>
+      </acceptor-config>
+      <proxy-config>
+         <cache-service-proxy>
+            <enabled>true</enabled>
+         </cache-service-proxy>
+         <invocation-service-proxy>
+            <enabled>true</enabled>
+         </invocation-service-proxy>
+      </proxy-config>
+      <autostart>true</autostart>
+   </proxy-scheme>
+
+<proxy-scheme>
+         <service-name>ExtendHttpProxyService</service-name>
+         <acceptor-config>
+            <http-acceptor>
+		<class-name> com.tangosol.coherence.rest.server.DefaultHttpServer</class-name>
+               <local-address>
+                  <address>localhost</address>
+                  <port>8084</port>
+               </local-address>
+
+		<resource-config>
+            		<instance>
+               		<class-name> com.tangosol.coherence.rest.server.DefaultResourceConfig  </class-name>
+            		</instance>
+            </resource-config>
+            </http-acceptor>
+<serializer>
+                    <class-name>com.tangosol.io.pof.ConfigurablePofContext</class-name>
+                    <init-params>
+                        <init-param>
+                            <param-type>string</param-type>
+                            <param-value>pof-config.xml</param-value>
+                        </init-param>
+                    </init-params>
+                </serializer>
+         </acceptor-config>
+         <autostart>true</autostart>
+      </proxy-scheme>
+
+  </caching-schemes>
+</cache-config>
+	
